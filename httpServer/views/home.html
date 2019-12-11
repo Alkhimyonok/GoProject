@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Sulphur+Point&display=swap" rel="stylesheet">
+    "
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="#">BookShopper</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Contacts
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">GitHub</a>
+                        <a class="dropdown-item" href="#">Email</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Telephone</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="text-right"><a href="/register" class="btn btn-primary"> Create an account</a></p>
+            <form action="" method="POST">
+                <div class="form-group">
+                    <input type="text" name="search" id="search" class="form-control"
+                           placeholder="Search specific product"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="data-table">
+                <p class="text-center">Type in the search field to find what you want</p>
+            </div>
+        </div>
+    </div>
+</div><!-- end container-->
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/bootstrap.js"></script>
+<script>
+    var ajaxSearch = (search) => {
+        $.ajax({
+            type: 'POST',
+            dataType: 'html',
+            url: '/',
+            beforeSend: () => {
+                $("#data-table").html("Search...");
+            },
+            data: {search: search},
+            success: (r) => {
+                $("#data-table").html(r);
+            }
+        });
+    };
+    $("#search").keyup(() => {
+        ajaxSearch($("#search").val());
+    });
+</script>
+</body>
+</html>
